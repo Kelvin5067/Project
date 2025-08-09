@@ -45,5 +45,13 @@ def show_town_menu():
     print("(Q)uit to main menu")
     print("------------------------")
 
-
+# To Save the current player stats and progress to the savegame.json file
+def save_game(player, fog, show_msg=True):
+    try:
+        with open("savegame.json", "w") as f:
+            json.dump({'player': player, 'fog': fog}, f)
+        if show_msg:
+            print("Game saved.")
+    except Exception as e:
+        print(f"Failed to save game: {e}")
 
