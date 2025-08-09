@@ -55,3 +55,14 @@ def save_game(player, fog, show_msg=True):
     except Exception as e:
         print(f"Failed to save game: {e}")
 
+# To Load player stats and progress from 'savegame.json' and returns them for game continuation
+def load_game():
+    try:
+        with open("savegame.json", "r") as f:
+            data = json.load(f)
+        print("Game loaded successfully!")
+        return data['player'], data['fog']
+    except Exception as e:
+        print(f"Failed to load game: {e}")
+        return None, None
+
