@@ -54,3 +54,4 @@ def save_game(player, fog, show_msg=True):
             print("Game saved.")
     except Exception as e:
         print(f"Failed to save game: {e}")
+
