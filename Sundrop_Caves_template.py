@@ -2,6 +2,8 @@
 # Class: IM02
 # Student ID: S10275067
 
+# To Set up the game's global variables, constants, and the data structure for player stats, map data, ore types, and selling prices
+
 from random import randint
 import json
 
@@ -56,6 +58,16 @@ def load_map(filename, map_struct):
                 map_struct.append(row)
     MAP_HEIGHT = len(map_struct)
     MAP_WIDTH = len(map_struct[0]) if MAP_HEIGHT > 0 else 0
+
+# To Load the surrounding 3×3 area around the player's current position
+def clear_fog(fog, player):
+    x, y = player['x'], player['y']
+    for dy in range(-1, 2):
+        for dx in range(-1, 2):
+            nx, ny = x + dx, y + dy
+            if 0 <= ny < MAP_HEIGHT and 0 <= nx < MAP_WIDTH:
+                fog[ny][nx] = ' '
+
 
 
 #Menu
