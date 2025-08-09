@@ -1,7 +1,27 @@
 # Name: Kelvin Teo
 # Class: IM02
 # Student ID: S10275067
+
 from random import randint
+
+player = {}
+game_map = []
+fog = []
+
+MAP_WIDTH = 0
+MAP_HEIGHT = 0
+
+TURNS_PER_DAY = 20
+WIN_GP = 500
+
+minerals = ['copper', 'silver', 'gold']
+mineral_names = {'C': 'copper', 'S': 'silver', 'G': 'gold'}
+
+prices = {
+    'copper': (1, 3),
+    'silver': (5, 8),
+    'gold': (10, 18)
+}
 
 
 #Menu
