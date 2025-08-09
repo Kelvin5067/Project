@@ -24,27 +24,6 @@ prices = {
     'gold': (10, 18)
 }
 
-
-#Menu
-def show_main_menu():
-    print()
-    print("--- Main Menu ----")
-    print("(N)ew game")
-    print("(L)oad saved game")
-    print("(Q)uit")
-    print("------------------")
-
-def show_town_menu():
-    print(f"Day")
-    print("----- Sundrop Town -----")
-    print("(B)uy stuff")
-    print("(I)nformation")
-    print("See Mine (M)ap")
-    print("(E)nter mine")
-    print("Sa(V)e game")
-    print("(Q)uit to main menu")
-    print("------------------------")
-
 # To Save the current player stats and progress to the savegame.json file
 def save_game(player, fog, show_msg=True):
     try:
@@ -65,4 +44,37 @@ def load_game():
     except Exception as e:
         print(f"Failed to load game: {e}")
         return None, None
+
+#To Load the mine layout from a file into a 2D list and set the map's width and height
+def load_map(filename, map_struct):
+    global MAP_WIDTH, MAP_HEIGHT
+    map_struct.clear()
+    with open(filename, 'r') as map_file:
+        for line in map_file:
+            row = list(line.strip())
+            if row:
+                map_struct.append(row)
+    MAP_HEIGHT = len(map_struct)
+    MAP_WIDTH = len(map_struct[0]) if MAP_HEIGHT > 0 else 0
+
+
+#Menu
+def show_main_menu():
+    print()
+    print("--- Main Menu ----")
+    print("(N)ew game")
+    print("(L)oad saved game")
+    print("(Q)uit")
+    print("------------------")
+
+def show_town_menu():
+    print(f"Day")
+    print("----- Sundrop Town -----")
+    print("(B)uy stuff")
+    print("(I)nformation")
+    print("See Mine (M)ap")
+    print("(E)nter mine")
+    print("Sa(V)e game")
+    print("(Q)uit to main menu")
+    print("------------------------")
 
