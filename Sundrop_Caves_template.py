@@ -87,6 +87,25 @@ def draw_map(game_map, fog, player):
         print(row)
     print("+------------------------------+")
 
+# To display the 3×3 local view around the player,  but it only shows the nearby tiles instead of the whole map
+def draw_view(game_map, player):
+    print("+---+")
+    for dy in range(-1, 2):
+        row = '|'
+        for dx in range(-1, 2):
+            nx = player['x'] + dx
+            ny = player['y'] + dy
+            if 0 <= ny < MAP_HEIGHT and 0 <= nx < MAP_WIDTH:
+                if dx == 0 and dy == 0:
+                    row += 'M'
+                else:
+                    row += game_map[ny][nx]
+            else:
+                row += '#'
+        row += '|'
+        print(row)
+    print("+---+")
+
 
 #Menu
 def show_main_menu():
