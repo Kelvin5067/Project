@@ -69,6 +69,24 @@ def clear_fog(fog, player):
                 fog[ny][nx] = ' '
 
 
+# To Display the entire mine map with the player’s position , portal location , unexplored areas, and visible tiles from game_map
+def draw_map(game_map, fog, player):
+    print("+------------------------------+")
+    for y in range(MAP_HEIGHT):
+        row = '|'
+        for x in range(MAP_WIDTH):
+            if (x, y) == (player['x'], player['y']):
+                row += 'M '
+            elif 'portal' in player and (x, y) == tuple(player['portal']):
+                row += 'P '
+            elif fog[y][x] == '?':
+                row += '? '
+            else:
+                row += game_map[y][x] + ' '
+        row += '|'
+        print(row)
+    print("+------------------------------+")
+
 
 #Menu
 def show_main_menu():
