@@ -283,4 +283,16 @@ def main():
             break
         else:
             continue
+        #Town Menu B = Buy items, I = View stats, M = Show map, E = Enter mine from portal
+        while True:
+            show_town_menu()
+            town_choice = input("Your choice? ").strip().upper()
+            if town_choice == 'B':
+                buy_stuff(player)
+            elif town_choice == 'I':
+                show_information(player)
+            elif town_choice == 'M':
+                draw_map(game_map, fog, player)
+            elif town_choice == 'E':
+                player['x'], player['y'] = player['portal']
 
