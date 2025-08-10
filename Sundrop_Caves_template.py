@@ -144,6 +144,42 @@ def show_information(player):
     print(f"Steps taken: {player['steps']}")
     print("------------------------------")
 
+
+# To display the player shop to upgrade pickaxe, backpack or to leave shop
+def buy_stuff(player):
+    while True:
+        print("----------------------- Shop Menu -------------------------")
+        if player['pickaxe'] == 1:
+            print(f"(P)ickaxe upgrade to Level 2 to mine silver ore for 50 GP")
+        elif player['pickaxe'] == 2:
+            print(f"(P)ickaxe upgrade to Level 3 to mine gold ore for 150 GP")
+        print(f"(B)ackpack upgrade to carry {player['max_load']+2} items for {player['max_load']*2} GP")
+        print("(L)eave shop")
+        print("-----------------------------------------------------------")
+        print(f"GP: {player['GP']}")
+        choice = input("Your choice? ").strip().upper()
+        if choice == 'B':
+            cost = player['max_load'] * 2
+            if player['GP'] >= cost:
+                player['GP'] -= cost
+                player['max_load'] += 2
+                print(f"Congratulations! You can now carry {player['max_load']} items!")
+            else:
+                print("Not enough GP!")
+        elif choice == 'P':
+            if player['pickaxe'] == 1 and player['GP'] >= 50:
+                player['GP'] -= 50
+                player['pickaxe'] = 2
+                print("Pickaxe upgraded to Level 2! You can now mine silver ore.")
+            elif player['pickaxe'] == 2 and player['GP'] >= 150:
+                player['GP'] -= 150
+                player['pickaxe'] = 3
+                print("Pickaxe upgraded to Level 3! You can now mine gold ore.")
+            else:
+                print("Not enough GP or already at maximum pickaxe level!")
+        elif choice == 'L':
+            break
+
 #Menu
 def show_main_menu():
     print()
