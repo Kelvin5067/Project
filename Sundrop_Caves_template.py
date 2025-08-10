@@ -71,7 +71,7 @@ def clear_fog(fog, player):
 
 # To Display the entire mine map with the player’s position , portal location , unexplored areas, and visible tiles from game_map
 def draw_map(game_map, fog, player):
-    print("+------------------------------+")
+    print("+------------------------------------+")
     for y in range(MAP_HEIGHT):
         row = '|'
         for x in range(MAP_WIDTH):
@@ -85,7 +85,7 @@ def draw_map(game_map, fog, player):
                 row += game_map[y][x] + ' '
         row += '|'
         print(row)
-    print("+------------------------------+")
+    print("+------------------------------------+")
 
 # To display the 3×3 local view around the player,  but it only shows the nearby tiles instead of the whole map
 def draw_view(game_map, player):
