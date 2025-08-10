@@ -128,6 +128,22 @@ def initialize_game(game_map, fog, player):
     })
     clear_fog(fog, player)
 
+# To display player info on Player Name,Position Pickaxe Level Number of Gold, Silver and Copper the load the gp and the number of steps taken
+def show_information(player):
+    print("----- Player Information -----")
+    print(f"Name: {player['name']}")
+    print(f"Current position: ({player['x']}, {player['y']})")
+    pickaxe_name = {1: '1 (copper)', 2: '2 (silver)', 3: '3 (gold)'}[player['pickaxe']]
+    print(f"Pickaxe level: {pickaxe_name}")
+    print(f"Gold: {player['gold']}")
+    print(f"Silver: {player['silver']}")
+    print(f"Copper: {player['copper']}")
+    load = player['gold'] + player['silver'] + player['copper']
+    print(f"Load: {load} / {player['max_load']}")
+    print(f"GP: {player['GP']}")
+    print(f"Steps taken: {player['steps']}")
+    print("------------------------------")
+
 #Menu
 def show_main_menu():
     print()
