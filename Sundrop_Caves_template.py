@@ -180,6 +180,39 @@ def buy_stuff(player):
         elif choice == 'L':
             break
 
+#This Function is to Handle a single move which will check the map boundary, ans will block ores that players wont be able to mine with their current axe level or when bag is full,  and updates position steps and turns, and mines ore if possible, and reveals fog around the new spot.
+def mine_tile(game_map, player, fog, dx, dy):
+    new_x = player['x'] + dx
+    new_y = player['y'] + dy
+    if not (0 <= new_x < MAP_WIDTH and 0 <= new_y < MAP_HEIGHT):
+        print("You can't move outside the map.")
+    else:
+        symbol = game_map[new_y][new_x]
+        ore_req = {'C': 1, 'S': 2, 'G': 3}
+        load = player['copper'] + player['silver'] + player['gold']
+        if symbol in 'CSG' and player['pickaxe'] < ore_req[symbol]:
+            print("Your pickaxe is not strong enough to mine this ore.")
+            return
+        if load >= player['max_load'] and symbol in 'CSG':
+            print("You can't carry any more, so you can't go that way.")
+        else:
+            player['x'], player['y'] = new_x, new_y
+            player['steps'] += 1
+            player['turns'] -= 1
+            if symbol in 'CSG':
+                ore_type = mineral_names[symbol]
+                max_pick = {'copper': 5, 'silver': 3, 'gold': 2}[ore_type]
+                qty = randint(1, max_pick)
+                free_space = player['max_load'] - load
+                if qty > free_space:
+                    print(f"You mined {qty} piece(s) of {ore_type}.")
+                    print(f"...but you can only carry {free_space} more piece(s)!")
+                    qty = free_space
+                else:
+                    print(f"You mined {qty} piece(s) of {ore_type}.")
+                player[ore_type] += qty
+            clear_fog(fog, player)
+
 #Menu
 def show_main_menu():
     print()
