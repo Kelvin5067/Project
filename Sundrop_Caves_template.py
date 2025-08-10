@@ -261,3 +261,26 @@ def show_mine_menu():
     print("(M)ap, (I)nformation, (P)ortal, (Q)uit to main menu")
 
 
+def main():
+    global player, fog
+    #Main Menu Use N to Start a New Game, L to load saved game from save game json file and Q to Quit Game
+    while True:
+        show_main_menu()
+        choice = input("Your choice? ").strip().upper()
+        if choice == 'N':
+            initialize_game(game_map, fog, player)
+        elif choice == 'L':
+            loaded_player, loaded_fog = load_game()
+            if loaded_player:
+                player = loaded_player
+                fog = loaded_fog
+                load_map("level1.txt", game_map)
+                clear_fog(fog, player)
+            else:
+                continue
+        elif choice == 'Q':
+            print("Thanks for playing Sundrop Caves!")
+            break
+        else:
+            continue
+
