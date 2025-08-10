@@ -253,3 +253,11 @@ def show_town_menu():
     print("(Q)uit to main menu")
     print("------------------------")
 
+def show_mine_menu():
+    print(f"\nDAY {player['day']}")
+    draw_view(game_map, player)
+    print(f"Turns left: {player['turns']}    Load: {player['copper'] + player['silver'] + player['gold']} / {player['max_load']}    Steps: {player['steps']}")
+    print("(WASD) to move")
+    print("(M)ap, (I)nformation, (P)ortal, (Q)uit to main menu")
+
+
