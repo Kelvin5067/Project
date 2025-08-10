@@ -261,6 +261,7 @@ def show_mine_menu():
     print("(M)ap, (I)nformation, (P)ortal, (Q)uit to main menu")
 
 
+#This function is to run the whole game loop — it shows the Main Menu (New/Load/Quit), starts or loads a game, then cycles the Town Menu (B/I/M/E/V/Q). When you Enter the mine, it opens the Mine Menu where WASD moves, M shows map, I shows info, P uses the portal, and Q quits to main. It also handles end-of-day exhaustion (auto-portal when turns hit 0) and checks the win condition (GP ≥ 500) to display the winning message and exit.
 def main():
     global player, fog
     #Main Menu Use N to Start a New Game, L to load saved game from save game json file and Q to Quit Game
@@ -283,7 +284,7 @@ def main():
             break
         else:
             continue
-        
+
         #Town Menu B = Buy items, I = View stats, M = Show map, E = Enter mine from portal
         while True:
             show_town_menu()
@@ -332,4 +333,6 @@ def main():
             elif town_choice == 'Q':
                 break
 
+if __name__ == "__main__":
+    main()
 
