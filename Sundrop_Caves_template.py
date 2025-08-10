@@ -106,6 +106,27 @@ def draw_view(game_map, player):
         print(row)
     print("+---+")
 
+#To load the map, the fog of war, and gives the player all their default starting stats like position, ores, GP, turns, and pickaxe level when they start a new game
+def initialize_game(game_map, fog, player):
+    load_map("level1.txt", game_map)
+    fog.clear()
+    for row in range(MAP_HEIGHT):
+        fog_row = ['?' for _ in range(MAP_WIDTH)]
+        fog.append(fog_row)
+    player['name'] = input("Greetings, miner! What is your name? ").strip()
+    print(f"Pleased to meet you, {player['name']}. Welcome to Sundrop Town!")
+    player.update({
+        'x': 0, 'y': 0,
+        'copper': 0, 'silver': 0, 'gold': 0,
+        'GP': 0,
+        'day': 1,
+        'steps': 0,
+        'turns': TURNS_PER_DAY,
+        'max_load': 10,
+        'pickaxe': 1,
+        'portal': [0, 0]
+    })
+    clear_fog(fog, player)
 
 #Menu
 def show_main_menu():
