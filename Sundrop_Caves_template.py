@@ -243,7 +243,7 @@ def show_main_menu():
     print("------------------")
 
 def show_town_menu():
-    print(f"Day")
+    print(f"\nDAY {player['day']}")
     print("----- Sundrop Town -----")
     print("(B)uy stuff")
     print("(I)nformation")
