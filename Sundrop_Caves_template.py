@@ -213,6 +213,26 @@ def mine_tile(game_map, player, fog, dx, dy):
                 player[ore_type] += qty
             clear_fog(fog, player)
 
+#This function is to let the player use the portal stone to sell all carried ores at random prices, adds the GP earned, saves the current location as the portal spot, teleports the player back to (0,0), resets turns, advances the day, clears the fog around town, and auto-saves the game
+def return_to_town(player):
+    print("\nYou place your portal stone here and zap back to town.")
+    for ore in ['copper', 'silver', 'gold']:
+        qty = player[ore]
+        if qty > 0:
+            min_price, max_price = prices[ore]
+            rate = randint(min_price, max_price)
+            gp = qty * rate
+            player['GP'] += gp
+            print(f"You sell {qty} {ore} ore for {gp} GP.")
+            player[ore] = 0
+    print(f"You now have {player['GP']} GP!")
+    player['portal'] = [player['x'], player['y']]
+    player['x'], player['y'] = 0, 0
+    player['turns'] = TURNS_PER_DAY
+    player['day'] += 1
+    clear_fog(fog, player)
+    save_game(player, fog, show_msg=False)
+
 #Menu
 def show_main_menu():
     print()
