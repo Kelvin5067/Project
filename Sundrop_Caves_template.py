@@ -283,6 +283,7 @@ def main():
             break
         else:
             continue
+        
         #Town Menu B = Buy items, I = View stats, M = Show map, E = Enter mine from portal
         while True:
             show_town_menu()
@@ -295,4 +296,40 @@ def main():
                 draw_map(game_map, fog, player)
             elif town_choice == 'E':
                 player['x'], player['y'] = player['portal']
+
+                # Mine Menu: WASD = Move, M = Show map, I = View stats, P = Return to town, Q = Quit, plus exhaustion and win checks
+                while True:
+                    show_mine_menu()
+                    action = input("Action? ").strip().upper()
+                    if action == 'W':
+                        mine_tile(game_map, player, fog, 0, -1)
+                    elif action == 'A':
+                        mine_tile(game_map, player, fog, -1, 0)
+                    elif action == 'S':
+                        mine_tile(game_map, player, fog, 0, 1)
+                    elif action == 'D':
+                        mine_tile(game_map, player, fog, 1, 0)
+                    elif action == 'M':
+                        draw_map(game_map, fog, player)
+                    elif action == 'I':
+                        show_information(player)
+                    elif action == 'P':
+                        return_to_town(player)
+                        break
+                    elif action == 'Q':
+                        return
+                    if player['turns'] <= 0:
+                        print("You are exhausted.")
+                        return_to_town(player)
+                        break
+                    if player['GP'] >= WIN_GP:
+                        print(f"\nWoo-hoo! Well done, {player['name']}, you have {player['GP']} GP!")
+                        print("You now have enough to retire and play video games every day.")
+                        print(f"And it only took you {player['day']} days and {player['steps']} steps! You win!")
+                        return
+            elif town_choice == 'V':
+                save_game(player, fog, show_msg=True)
+            elif town_choice == 'Q':
+                break
+
 
